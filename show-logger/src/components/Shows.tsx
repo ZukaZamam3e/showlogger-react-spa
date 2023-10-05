@@ -1,5 +1,6 @@
 import { Box, Tab, Tabs, Typography } from "@mui/material"
-import { ReactNode, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
+import { ShowsList } from "./ShowsList";
 
 interface ShowsTabPanelProps {
     children?: ReactNode;
@@ -28,9 +29,11 @@ export const ShowsTabPanel = (props: ShowsTabPanelProps) => {
 
 export const Shows = () => {
     const [selectedTab, setSelectedTab] = useState(0);
+    const [isMobile, setIsMobile] = useState(false);
+    const tabsVarient:any = isMobile ? "scrollable" : "";
 
     const tabs = [
-        { id: 0, label: "Shows", content: null },
+        { id: 0, label: "Shows", content: <ShowsList /> },
         { id: 1, label: "TV Stats", content: null },
         { id: 2, label: "Movies Stats", content: null },
         { id: 3, label: "Friends", content: null },
@@ -41,7 +44,18 @@ export const Shows = () => {
 
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {
         setSelectedTab(newValue);
-      };
+    };
+
+
+    useEffect(() => {
+        detectWindowSize();
+    }, [window.screen.width]);
+
+    const detectWindowSize = () => {
+        window.innerWidth <= 760 ? setIsMobile(true) : setIsMobile(false);        
+    }
+    
+    window.onresize = detectWindowSize;
 
     return (
         <Box>
@@ -49,9 +63,9 @@ export const Shows = () => {
                 <Tabs
                     value={selectedTab}
                     onChange={handleChange}
-                    variant="scrollable"
-                    //centered
-                    //allowScrollButtonsMobile
+                    variant={tabsVarient}
+                    centered={!isMobile}
+                    //allowScrollButtonsMobile={isMobile}
                 >
                     {tabs.map((tab: any, index) => (
                         <Tab
@@ -67,7 +81,7 @@ export const Shows = () => {
                     index={tab.id}
                     value={selectedTab}
                 >
-                    {tab.label}
+                    {tab.content}
                 </ShowsTabPanel>
             ))}
         </Box>
