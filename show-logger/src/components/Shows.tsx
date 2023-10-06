@@ -33,7 +33,7 @@ export const Shows = () => {
     const tabsVarient:any = isMobile ? "scrollable" : "";
 
     const tabs = [
-        { id: 0, label: "Shows", content: <ShowsList /> },
+        { id: 0, label: "Shows", content: <ShowsList isMobile={isMobile} /> },
         { id: 1, label: "TV Stats", content: null },
         { id: 2, label: "Movies Stats", content: null },
         { id: 3, label: "Friends", content: null },

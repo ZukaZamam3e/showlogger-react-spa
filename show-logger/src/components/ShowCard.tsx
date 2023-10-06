@@ -1,30 +1,89 @@
 import { ShowModel } from "../models/ShowModel";
-import { Button, Card, CardActions, CardContent, IconButton, Typography } from "@mui/material";
+import { Box, Button, Card, CardActions, CardContent, IconButton, Stack, Typography } from "@mui/material";
 import Grid from '@mui/material/Unstable_Grid2';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+import AddIcon from '@mui/icons-material/Add';
 
 interface ShowCardProps {
     show: ShowModel;
+    isMobile: boolean;
 }
 
-export const ShowCard = (props:ShowCardProps) => {
-    const showTypeIdZ = `${props.show.showTypeIdZ}${props.show.showTypeId === 1000 ? 
-        ` - s${props.show.seasonNumber?.toString().padStart(2, "0")}e${props.show.episodeNumber?.toString().padStart(2, "0")}` 
+export const ShowCard = (props: ShowCardProps) => {
+    const showTypeIdZ = `${props.show.showTypeIdZ}${props.show.showTypeId === 1000 ?
+        ` - s${props.show.seasonNumber?.toString().padStart(2, "0")}e${props.show.episodeNumber?.toString().padStart(2, "0")}`
         : ""}`
+
+
     return (
         <Grid xs={12}>
-            <Card>
-                <CardContent>
-                    <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-                        {props.show.showName}
-                    </Typography>
-                    <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-                        {showTypeIdZ}
-                    </Typography>
-                    <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-                        {props.show.dateWatched.toLocaleDateString()}
-                    </Typography>
-                </CardContent>
-            </Card>
+            {props.isMobile ?
+                <Card sx={{ border: 2, borderRadius: 3 }}>
+                    <Grid container spacing={1} alignItems="center">
+                        <Grid xs={4}>
+                            <CardActions sx={{ justifyContent: "center" }}>
+                                <Grid container spacing={1}>
+                                    <Grid xs={12} sx={{ justifyContent: "center" }}>
+                                        <IconButton aria-label="Edit" sx={{ border: 1, borderRadius: '25%' }} size="small">
+                                            <EditIcon fontSize="inherit" />
+                                        </IconButton>
+                                    </Grid>
+                                    <Grid xs={12} sx={{ display: 'flex', gap: 1, justifyContent: "center" }}>
+                                        <IconButton aria-label="Add Next Episode" sx={{ border: 1, borderRadius: '25%' }} size="small">
+                                            <AddIcon fontSize="inherit" />
+                                        </IconButton>
+                                        <IconButton aria-label="delete" sx={{ border: 1, borderRadius: '25%' }} size="small">
+                                            <DeleteIcon fontSize="inherit" />
+                                        </IconButton>
+                                    </Grid>
+                                </Grid>
+                            </CardActions>
+                        </Grid>
+                        <Grid xs={8} sx={{ displyay: 'flex' }}>
+                            <Typography sx={{ fontSize: 13 }} color="text.secondary">
+                                {props.show.showName}
+                                <br />
+                                {showTypeIdZ}
+                                <br />
+                                {props.show.dateWatched.toLocaleDateString()}
+                            </Typography>
+
+                        </Grid>
+                    </Grid>
+                </Card>
+                :
+                <Card sx={{ border: 2, borderRadius: 3, padding: 2 }}>
+                    <Grid container spacing={3} alignItems="center">
+                        <Grid xs={4} sx={{ justifyContent: "center", display: 'flex', gap: 2 }}>
+                            <IconButton aria-label="Edit" sx={{ border: 1, borderRadius: '25%' }} size="small">
+                                <EditIcon fontSize="inherit" />
+                            </IconButton>
+                            <IconButton aria-label="Add Next Episode" sx={{ border: 1, borderRadius: '25%' }} size="small">
+                                <AddIcon fontSize="inherit" />
+                            </IconButton>
+                            <IconButton aria-label="delete" sx={{ border: 1, borderRadius: '25%' }} size="small">
+                                <DeleteIcon fontSize="inherit" />
+                            </IconButton>
+                        </Grid>
+                        <Grid xs={3}>
+                            <Typography sx={{ fontSize: 14 }} color="text.secondary">
+                                {props.show.showName}
+                            </Typography>
+                        </Grid>
+                        <Grid xs={3}>
+                            <Typography sx={{ fontSize: 14 }} color="text.secondary">
+                                {showTypeIdZ}
+                            </Typography>
+                        </Grid>
+                        <Grid xs={2}>
+                            <Typography sx={{ fontSize: 14 }} color="text.secondary">
+                                {props.show.dateWatched.toLocaleDateString()}
+                            </Typography>
+                        </Grid>
+                    </Grid>
+                </Card>
+            }
         </Grid>
     );
 }
