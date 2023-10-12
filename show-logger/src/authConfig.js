@@ -16,7 +16,7 @@ export const msalConfig = {
         authority: 'https://login.microsoftonline.com/2e2f4c33-7455-4484-9731-dc3058288375', // Replace the placeholder with your tenant subdomain
         redirectUri: '/', // You must register this URI on Azure Portal/App Registration. Defaults to window.location.origin
         postLogoutRedirectUri: '/', // Indicates the page to navigate after logout.
-        navigateToLoginRequestUrl: false,
+        navigateToLoginRequestUrl: true,
     },
     cache: {
         cacheLocation: 'sessionStorage', // Configures cache location. "sessionStorage" is more secure, but "localStorage" gives you SSO between tabs.
@@ -60,6 +60,8 @@ export const msalConfig = {
 export const protectedResources = {
     oaprojectsApi: {
         weatherEndpoint: process.env.REACT_APP_API_URL + '/WeatherForecast',
+        authEndpoint: process.env.REACT_APP_API_URL  + '/auth',
+        showEndpoint: process.env.REACT_APP_API_URL  + '/show',
         scopes: {
             write: ['api://89f937e2-f440-4ae3-86dc-b0ec5ba9a11c/User.ReadWrite'],
         }

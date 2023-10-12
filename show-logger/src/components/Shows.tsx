@@ -1,4 +1,4 @@
-import { Box, Tab, Tabs, Typography } from "@mui/material"
+import { Box, Tab, Tabs, Typography } from "@mui/material";
 import { ReactNode, useEffect, useState } from "react";
 import { ShowsList } from "./ShowsList";
 
@@ -20,7 +20,7 @@ export const ShowsTabPanel = (props: ShowsTabPanelProps) => {
         >
             {value === index && (
                 <Box sx={{ p: 3 }}>
-                    <Typography>{children}</Typography>
+                    {children}
                 </Box>
             )}
         </div>
@@ -30,7 +30,7 @@ export const ShowsTabPanel = (props: ShowsTabPanelProps) => {
 export const Shows = () => {
     const [selectedTab, setSelectedTab] = useState(0);
     const [isMobile, setIsMobile] = useState(false);
-    const tabsVarient:any = isMobile ? "scrollable" : "";
+    const tabsVarient:any = isMobile ? "scrollable" : "standard";
 
     const tabs = [
         { id: 0, label: "Shows", content: <ShowsList isMobile={isMobile} /> },

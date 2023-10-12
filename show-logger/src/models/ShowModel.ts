@@ -1,12 +1,24 @@
 export interface ShowModel {
     showId: number;
-    showName: string;
-    showTypeId: number;
+    showName?: string;
+    showTypeId?: number;
     showTypeIdZ?: string;
     seasonNumber?: number;
     episodeNumber?: number;
-    dateWatched: Date;
+    dateWatched?: Date;
     showNotes?: string;
+}
+
+export const createNewShow = () => {
+    let newShow: ShowModel = {
+        showId: -1,
+        dateWatched: new Date(),
+        showTypeId: 1000,
+        seasonNumber: 1,
+        episodeNumber: 1,
+    };
+
+    return newShow;
 }
 
 export const getShowData = () => {

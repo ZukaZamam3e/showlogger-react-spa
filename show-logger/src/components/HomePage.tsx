@@ -32,10 +32,7 @@ export const HomePage = () => {
     // }, [readGroups.execute, readGroups.data]);
 
     return (
-        <MsalAuthenticationTemplate
-            interactionType={InteractionType.Redirect}
-            authenticationRequest={authRequest}
-        >
+        <div>
             {/* Hello logged in user. */}
                 <Shows />
             {/* {activeGroupId == -1
@@ -48,6 +45,6 @@ export const HomePage = () => {
                 : <GamesList groupId={activeGroupId} />
             } */}
             
-        </MsalAuthenticationTemplate>
+        </div>
     );
 }

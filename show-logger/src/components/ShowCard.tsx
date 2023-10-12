@@ -8,6 +8,7 @@ import AddIcon from '@mui/icons-material/Add';
 interface ShowCardProps {
     show: ShowModel;
     isMobile: boolean;
+    onSelectShow: (show: ShowModel) => void;
 }
 
 export const ShowCard = (props: ShowCardProps) => {
@@ -25,7 +26,7 @@ export const ShowCard = (props: ShowCardProps) => {
                             <CardActions sx={{ justifyContent: "center" }}>
                                 <Grid container spacing={1}>
                                     <Grid xs={12} sx={{ justifyContent: "center" }}>
-                                        <IconButton aria-label="Edit" sx={{ border: 1, borderRadius: '25%' }} size="small">
+                                        <IconButton aria-label="Edit" sx={{ border: 1, borderRadius: '25%' }} size="small" onClick={() => { props.onSelectShow(props.show) }}>
                                             <EditIcon fontSize="inherit" />
                                         </IconButton>
                                     </Grid>
@@ -41,12 +42,16 @@ export const ShowCard = (props: ShowCardProps) => {
                             </CardActions>
                         </Grid>
                         <Grid xs={8} sx={{ displyay: 'flex' }}>
-                            <Typography sx={{ fontSize: 13 }} color="text.secondary">
+                            <Typography 
+                                sx={{ fontSize: 13 }} 
+                                color="text.secondary"
+                                component={'span'} variant={'body2'}
+                            >
                                 {props.show.showName}
                                 <br />
                                 {showTypeIdZ}
                                 <br />
-                                {props.show.dateWatched.toLocaleDateString()}
+                                {props.show.dateWatched && new Date(props.show.dateWatched).toLocaleDateString()}
                             </Typography>
 
                         </Grid>
@@ -56,7 +61,7 @@ export const ShowCard = (props: ShowCardProps) => {
                 <Card sx={{ border: 2, borderRadius: 3, padding: 2 }}>
                     <Grid container spacing={3} alignItems="center">
                         <Grid xs={4} sx={{ justifyContent: "center", display: 'flex', gap: 2 }}>
-                            <IconButton aria-label="Edit" sx={{ border: 1, borderRadius: '25%' }} size="small">
+                            <IconButton aria-label="Edit" sx={{ border: 1, borderRadius: '25%' }} size="small" onClick={() => { props.onSelectShow(props.show) }}>
                                 <EditIcon fontSize="inherit" />
                             </IconButton>
                             <IconButton aria-label="Add Next Episode" sx={{ border: 1, borderRadius: '25%' }} size="small">
@@ -78,7 +83,7 @@ export const ShowCard = (props: ShowCardProps) => {
                         </Grid>
                         <Grid xs={2}>
                             <Typography sx={{ fontSize: 14 }} color="text.secondary">
-                                {props.show.dateWatched.toLocaleDateString()}
+                                {props.show.dateWatched && new Date(props.show.dateWatched).toLocaleDateString()}
                             </Typography>
                         </Grid>
                     </Grid>

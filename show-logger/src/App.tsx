@@ -48,20 +48,20 @@ const App = () => {
         /> */}
           <Meta name="viewport" content="initial-scale=1, width=device-width" />
 
-          <div className="App"
-          // style={appStyle}
-          >
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <ThemeProvider theme={darkTheme}>
-      <CssBaseline />
+        <div className="App"
+        // style={appStyle}
+        >
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <ThemeProvider theme={darkTheme}>
+              <CssBaseline />
 
               <PageLayout>
                 <Pages />
               </PageLayout>
-      </ThemeProvider>
-            </LocalizationProvider>
+            </ThemeProvider>
+          </LocalizationProvider>
 
-          </div>
+        </div>
 
         </HeadProvider>
     </MsalProvider>
