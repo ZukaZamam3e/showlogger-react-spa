@@ -1,6 +1,7 @@
 import { Box, Tab, Tabs, Typography } from "@mui/material";
 import { ReactNode, useEffect, useState } from "react";
 import { ShowsList } from "./ShowsList";
+import { ShowsTab } from "./ShowsTab";
 
 interface ShowsTabPanelProps {
     children?: ReactNode;
@@ -19,7 +20,7 @@ export const ShowsTabPanel = (props: ShowsTabPanelProps) => {
             aria-labelledby={`simple-tab-${index}`}
         >
             {value === index && (
-                <Box sx={{ p: 3 }}>
+                <Box sx={{ p: 1 }}>
                     {children}
                 </Box>
             )}
@@ -33,7 +34,7 @@ export const Shows = () => {
     const tabsVarient:any = isMobile ? "scrollable" : "standard";
 
     const tabs = [
-        { id: 0, label: "Shows", content: <ShowsList isMobile={isMobile} /> },
+        { id: 0, label: "Shows", content: <ShowsTab isMobile={isMobile} /> },
         { id: 1, label: "TV Stats", content: null },
         { id: 2, label: "Movies Stats", content: null },
         { id: 3, label: "Friends", content: null },
@@ -56,6 +57,7 @@ export const Shows = () => {
     }
     
     window.onresize = detectWindowSize;
+    // window.onscroll = handleScroll;
 
     return (
         <Box>
